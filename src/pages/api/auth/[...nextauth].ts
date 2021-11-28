@@ -13,10 +13,7 @@ export default NextAuth({
       scope: 'read:user'
     }),
   ],
-
-  jwt: {
-    signingKey: process.env.SIGNIN_KEY
-  },
+  
   callbacks: {
     async signIn(user) {
       const { email } = user;
@@ -39,7 +36,7 @@ export default NextAuth({
             q.Get(
               q.Match(
                 q.Index('user_by_email'),
-                q.Casefold(user.email)
+                q.Casefold(email)
             ))
           )
         )
