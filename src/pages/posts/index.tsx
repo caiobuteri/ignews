@@ -31,7 +31,7 @@ export default function Posts({ posts }: PostProps) {
         <div className={styles.posts}>
           {
             posts.map(post => (
-              <Link key={post.slug} href="">
+              <Link key={post.slug} href={`/posts/${post.slug}`}>
                 <a>
                   <time>{post.updatedAt}</time>
                   <strong>{post.title}</strong>
@@ -56,8 +56,6 @@ export const getStaticProps: GetStaticProps = async () => {
     fetch: ['publication', 'public.content'],
     pageSize: 100
   });
-
-  console.log(JSON.stringify(response, null, 2));
 
   const posts = response.results.map(post => {
     return {
